@@ -1,8 +1,9 @@
 function getHubSpotProperties() {
   const token = 'HubSpot_API_Token';
-  const objects = ['company', 'contact', 'deal', 'ticket', 'events', 'partnerships', 'call', 'feedback_submission', 'marketing_event', 'meeting', 'plans', 'product', 'quote', 'ticket', 'referrals', 'user', 'automation_platform_flow', 'line_item', 'tasks'];
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = spreadsheet.getSheetByName("Properties");
+  const objects = ['company', 'contact', 'deal', 'ticket', 'events', 'partnerships', 'call', 'feedback_submission', 'marketing_event', 'meeting', 'plans', 'product', 'quote', 'referrals', 'user', 'automation_platform_flow', 'line_item', 'tasks'];
+  const SHEET_NAME = "Properties";
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME) 
+                || SpreadsheetApp.getActiveSpreadsheet().insertSheet(SHEET_NAME);
   sheet.clear();
   let allHeaders = new Set();
   let allData = [];
