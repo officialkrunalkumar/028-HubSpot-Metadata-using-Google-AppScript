@@ -42,7 +42,7 @@ function getHubSpotFlowsWithFullDetails() {
   sheet.appendRow(headers);
   allDetails.forEach(details => {
     const row = headers.map(header => {
-      const value = getValueByPath(details, header);
+      var value = getValueByPath(details, header);
       if(value !== undefined)
       {
         value = JSON.stringify(value)
