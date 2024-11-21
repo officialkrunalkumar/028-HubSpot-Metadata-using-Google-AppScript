@@ -43,7 +43,19 @@ function getHubSpotFlowsWithFullDetails() {
   allDetails.forEach(details => {
     const row = headers.map(header => {
       const value = getValueByPath(details, header);
-      return value !== undefined ? JSON.stringify(value) : "";
+      if(value !== undefined)
+      {
+        value = JSON.stringify(value)
+        if (typeof value === "string" && value.startsWith('"') && value.endsWith('"'))
+        {
+          value = value.slice(1, -1);
+        }
+      }
+      else
+      {
+        value = "";
+      }
+      return value;
     });
     sheet.appendRow(row);
   });
