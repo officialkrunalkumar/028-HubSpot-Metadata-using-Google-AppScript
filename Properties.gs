@@ -1,9 +1,12 @@
 function getHubSpotProperties() {
   const token = 'HubSpot_API_Token';
-  const objects = ['company', 'contact', 'deal', 'ticket', 'events', 'partnerships', 'call', 'feedback_submission', 'marketing_event', 'meeting', 'plans', 'product', 'quote', 'referrals', 'user', 'automation_platform_flow', 'line_item', 'tasks'];
-  const SHEET_NAME = "Properties";
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME) 
-                || SpreadsheetApp.getActiveSpreadsheet().insertSheet(SHEET_NAME);
+  const objects = ['company', 'contact', 'deal', 'ticket', 'email' , 'events', 'partnerships', 'call', 'feedback_submission', 'marketing_event', 'meeting', 'plans', 'product', 'quote', 'referrals', 'user', 'automation_platform_flow', 'line_item', 'tasks', '2-37766506', '2-39538272'];
+  const objectMapping = {
+    '2-37766506': 'Chargebee Invoices',
+    '2-39538272': 'Demo Meetings'
+  };
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = spreadsheet.getSheetByName("Properties");
   sheet.clear();
   let allHeaders = new Set();
   let allData = [];
@@ -21,7 +24,7 @@ function getHubSpotProperties() {
     if (data.results && data.results.length > 0) {
       data.results.forEach(function(prop) {
         Object.keys(prop).forEach(key => allHeaders.add(key));
-        prop["Object Type"] = objectType;
+        prop["Object Type"] = objectMapping[objectType] || objectType;
         allData.push(prop);
       });
     }
